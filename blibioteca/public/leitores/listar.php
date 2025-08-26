@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/../../config/conexao.php";
 
-// Deletar leitor
+
 if (isset($_GET['excluir'])) {
     $id_excluir = intval($_GET['excluir']);
     $conn->query("DELETE FROM leitores WHERE id_leitor = $id_excluir");
@@ -9,7 +9,7 @@ if (isset($_GET['excluir'])) {
     exit;
 }
 
-// Listar todos os leitores
+
 $result = $conn->query("SELECT * FROM leitores");
 ?>
 

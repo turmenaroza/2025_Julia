@@ -1,12 +1,12 @@
 <?php
 include __DIR__ . "/../../config/conexao.php";
 
-// Filtros
+
 $filtro_genero = $_GET['genero'] ?? '';
 $filtro_autor = $_GET['autor'] ?? '';
 $filtro_ano = $_GET['ano'] ?? '';
 
-// Query básica com join para pegar o nome do autor
+
 $sql = "SELECT livros.id_livro, livros.titulo, livros.genero, livros.ano_publicacao, autores.nome AS autor
         FROM livros
         INNER JOIN autores ON livros.id_autor = autores.id_autor
