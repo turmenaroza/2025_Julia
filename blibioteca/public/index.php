@@ -40,7 +40,7 @@
     </style>
 </head>
 <body>
-    <h1>📚 Sistema de Gestão da Biblioteca</h1>
+    <h1>📚  Sistema de Gestão da Biblioteca</h1>
     <p>Escolha uma opção abaixo:</p>
 
     <div class="menu">
