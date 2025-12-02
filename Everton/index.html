@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Melhor Site da Turma 🏆</title>
+    <style>
+        /* O CSS Berrante */
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ff66cc;
+            color: #00ff00;
+            text-align: center;
+            padding-top: 50px;
+        }
+        button {
+            background-color: #ffff00;
+            color: #ff0000;
+            border: 5px solid #0000ff;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        /* CLASSE PARA O BOTÃO MAIS DIFÍCIL (APLICADA AO BOTÃO 3) */
+        .inalcancavel {
+            position: absolute;
+            transition: all 0.2s ease-out;
+            /* Diminuindo o tamanho do botão para dificultar */
+            font-size: 14px; 
+            padding: 5px 10px;
+        }
+        #perguntaFinal {
+            display: none;
+            margin-top: 80px;
+            font-size: 80px;
+            color: white;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+            animation: piscar 0.5s infinite alternate;
+        }
+        @keyframes piscar {
+            from { opacity: 1; }
+            to { opacity: 0.5; }
+        }
+
+        /* ANIMAÇÃO DE TREMOR */
+        @keyframes tremer {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        .tela-tremendo {
+            animation: tremer 0.1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>BEM-VINDO AO SITE MAIS INTERATIVO QUE JÁ EXISTIU!</h1>
+    <p>Clique nos botões abaixo para acessar recursos **INCRÍVEIS**.</p>
+
+    <div id="botoes">
+        <button id="btn1">CLIQUE AQUI PARA DOWNLOAD GRÁTIS DE DINHEIRO</button>
+        
+        <button id="btn2">MUDAR COR DO FUNDO PARA AZUL ESCURO</button>
+
+        <button id="btn4">CLIQUE AQUI PARA RESGATAR SEU BRINDE EXCLUSIVO</button>
+
+        <button id="btn5">CLIQUE PARA A PROMOÇÃO DE 99% DE DESCONTO</button>
+    </div>
+
+    <button id="btn3" class="inalcancavel">CLIQUE PARA REVELAR O SEGREDO DO UNIVERSO</button>
+
+    <div id="perguntaFinal">
+        
+        EWERTON, ACEITA SER NOSSO AMIGO DE TURMA?
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn1 = document.getElementById('btn1');
+            const btn2 = document.getElementById('btn2');
+            const btn3 = document.getElementById('btn3'); // AGORA É O INALCANÇÁVEL/FINAL
+            const btn4 = document.getElementById('btn4');
+            const btn5 = document.getElementById('btn5'); // AGORA É O BOTÃO DE TROLAGEM INTERMEDIÁRIA
+            const botoesDiv = document.getElementById('botoes');
+            const perguntaFinal = document.getElementById('perguntaFinal');
+
+            // VARIÁVEL PARA CONTROLAR SE O BOTÃO PODE FUGIR
+            let btn3Fugindo = true;
+
+            // FUNÇÃO PARA POSICIONAR O BOTÃO EM QUALQUER LUGAR DA TELA (MAIS DE 25% DO CANTO)
+            const posicionarAleatoriamente = (botao) => {
+                const maxX = window.innerWidth - botao.offsetWidth;
+                const maxY = window.innerHeight - botao.offsetHeight;
+
+                // Restringe a posição para aparecer em um dos cantos (0-25% da tela)
+                const rangeX = maxX * 0.25;
+                const rangeY = maxY * 0.25;
+
+                const corner = Math.floor(Math.random() * 4); 
+                let newX, newY;
+
+                if (corner === 0) { // Canto superior esquerdo
+                    newX = Math.random() * rangeX;
+                    newY = Math.random() * rangeY;
+                } else if (corner === 1) { // Canto superior direito
+                    newX = maxX - (Math.random() * rangeX);
+                    newY = Math.random() * rangeY;
+                } else if (corner === 2) { // Canto inferior esquerdo
+                    newX = Math.random() * rangeX;
+                    newY = maxY - (Math.random() * rangeY);
+                } else { // Canto inferior direito
+                    newX = maxX - (Math.random() * rangeX);
+                    newY = maxY - (Math.random() * rangeY);
+                }
+
+                botao.style.left = `${newX}px`;
+                botao.style.top = `${newY}px`;
+            }
+
+            // NOVIDADE: O Botão 3 precisa de uma função nomeada para que possamos removê-la
+            const btn3Foge = () => {
+                if (btn3Fugindo) {
+                    posicionarAleatoriamente(btn3);
+                }
+            };
+
+            // 1. Inicia o Botão 3 fugindo
+            posicionarAleatoriamente(btn3);
+            btn3.addEventListener('mouseover', btn3Foge);
+            
+            // 2. A MÁGICA DA TROLAGEM: Desativa a fuga após 20 segundos (20000 milissegundos)
+            setTimeout(() => {
+                btn3Fugindo = false;
+                // Move o botão para a div principal para que ele volte ao fluxo normal e seja fácil de clicar
+                botoesDiv.appendChild(btn3); 
+                btn3.classList.remove('inalcancavel');
+                btn3.style.position = 'static'; 
+                btn3.style.margin = '20px auto'; 
+                btn3.innerText = 'CLIQUE AGORA! O UNIVERSO ESPEROU 20 SEGUNDOS POR VOCÊ!'; // Mensagem de alívio
+                alert('Uau! O botão finalmente parou de fugir. Esta é a sua chance!');
+            }, 20000); // 20 segundos
+
+
+            // TROLLAGEM 1: O botão que se esconde quando você tenta clicar
+            btn1.addEventListener('mouseover', () => {
+                const newX = Math.random() * (window.innerWidth - btn1.offsetWidth);
+                const newY = Math.random() * (window.innerHeight - btn1.offsetHeight);
+                
+                btn1.style.position = 'absolute';
+                btn1.style.left = `${newX}px`;
+                btn1.style.top = `${newY}px`;
+            });
+            btn1.addEventListener('click', () => {
+                alert('HAHA! Não tem dinheiro grátis. Tente de novo!');
+            });
+
+            // TROLLAGEM 2: O botão que prometia mudar a cor e faz outra coisa
+            btn2.addEventListener('click', () => {
+                window.scrollBy(500, 0);
+                alert('A cor não mudou, mas você tentou! Aqui está uma janela inútil.');
+            });
+
+            // TROLLAGEM 3: O Botão Final Inalcançável (Que agora para de fugir)
+            btn3.addEventListener('click', () => {
+                if (btn3Fugindo) {
+                    alert("Calma lá! Você tem que ser mais rápido para clicar nesse botão antes que ele fuja!");
+                    return; // Impede o final se ainda estiver fugindo
+                }
+                
+                // ESTE É O GRANDE FINAL!
+                botoesDiv.style.display = 'none';
+                btn3.style.display = 'none'; 
+                btn5.style.display = 'none'; 
+                perguntaFinal.style.display = 'block';
+
+                document.body.classList.add('tela-tremendo'); // Ativa o tremor
+                document.title = 'A GRANDE PERGUNTA!';
+
+                const confete = document.createElement('div');
+                confete.innerHTML = '🎉🎊🎉🎊🎉🎊🎉';
+                confete.style.fontSize = '40px';
+                document.body.prepend(confete);
+            });
+
+
+            // TROLLAGEM 4: O botão que se multiplica
+            btn4.addEventListener('click', function() {
+                const novoBotao = btn4.cloneNode(true);
+                novoBotao.style.backgroundColor = '#00ffff';
+                novoBotao.innerText = 'OUTRO BRINDE! CLIQUE AQUI TAMBÉM';
+                
+                botoesDiv.appendChild(novoBotao);
+                btn4.innerText = 'Você gerou mais um! Agora tente clicar em todos!';
+                
+                btn4.disabled = true;
+                setTimeout(() => {
+                    btn4.disabled = false;
+                }, 1000);
+
+                alert('Parabéns! Você ganhou mais um botão para clicar! Agora são dois (ou mais)!');
+            });
+            
+            // TROLLAGEM 5: O botão de trolagem intermediária (Antigo Inalcançável)
+            btn5.addEventListener('click', () => {
+                alert('Você conseguiu! Mas a promoção já passou. Continue tentando os outros botões!');
+                
+                // Remove o botão da tela
+                btn5.remove();
+            });
+        });
+    </script>
+</body>
+</html>
